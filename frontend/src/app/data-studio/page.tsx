@@ -987,6 +987,7 @@ export default function DataStudioPage() {
   const [testsOpen, setTestsOpen] = useState(false);
   const [testsModel, setTestsModel] = useState<string>("");
   const [gitOpen, setGitOpen] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
   // Resizable panes
   const [sidebarW, setSidebarW] = useState(() =>
@@ -1291,10 +1292,10 @@ export default function DataStudioPage() {
                   <span className="truncate font-medium">{p.name}</span>
                   <button
                     title="Delete project"
-                    onClick={(e) => { e.stopPropagation(); deleteProject(p.id); }}
-                    className="opacity-0 group-hover:opacity-100 shrink-0"
+                    onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(p.id); }}
+                    className="shrink-0"
                   >
-                    <Trash2 className="h-3 w-3 text-red-400 hover:text-red-600" />
+                    <Trash2 className="h-3 w-3 text-red-500 hover:text-red-400" />
                   </button>
                 </div>
               ))}
@@ -1366,7 +1367,7 @@ export default function DataStudioPage() {
                       title="Delete"
                       onClick={(e) => { e.stopPropagation(); deleteModel(name, type); }}
                     >
-                      <Trash2 className="h-3 w-3 text-red-400 hover:text-red-600" />
+                      <Trash2 className="h-3 w-3 text-red-500 hover:text-red-400" />
                     </button>
                   </div>
                 </div>
@@ -1625,6 +1626,34 @@ export default function DataStudioPage() {
         onClose={() => setGitOpen(false)}
         projectId={currentProjectId}
       />
+
+      {/* Delete project confirmation */}
+      <Dialog open={!!confirmDeleteId} onOpenChange={(o) => { if (!o) setConfirmDeleteId(null); }}>
+        <DialogContent className="max-w-sm bg-card border-border">
+          <h2 className="text-base font-semibold">Delete project?</h2>
+          <p className="text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">
+              {dbtProjects.find((p) => p.id === confirmDeleteId)?.name}
+            </span>
+            {" "}and all its models will be permanently deleted. This cannot be undone.
+          </p>
+          <div className="flex justify-end gap-2 mt-1">
+            <Button variant="ghost" size="sm" onClick={() => setConfirmDeleteId(null)}>
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => {
+                if (confirmDeleteId) deleteProject(confirmDeleteId);
+                setConfirmDeleteId(null);
+              }}
+            >
+              <Trash2 className="h-3.5 w-3.5 mr-1.5" /> Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
       <TestsDialog
         open={testsOpen}
         onClose={() => setTestsOpen(false)}

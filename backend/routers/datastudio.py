@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Optional, Any, List
 from core.db import get_connection, _best_odbc_driver
 from core.logger import log
-import subprocess, shutil, json, re, uuid, os, time
+import subprocess, shutil, json, re, uuid, os, time, stat
 
 router = APIRouter()
 
@@ -44,6 +44,14 @@ def _save_index(projects: list[dict]):
 
 def _workspace(project_id: str) -> Path:
     return _PROJECTS_DIR / project_id
+
+
+def _rmtree(path: Path) -> None:
+    """Delete a directory tree, handling read-only files (common with nested .git on Windows)."""
+    def _force_writeable(func, fpath, _):
+        os.chmod(fpath, stat.S_IWRITE)
+        func(fpath)
+    shutil.rmtree(path, onerror=_force_writeable)
 
 
 def _find_dbt() -> Optional[str]:
@@ -302,7 +310,7 @@ def delete_project(project_id: str):
     _require_project(project_id)
     ws = _workspace(project_id)
     if ws.exists():
-        shutil.rmtree(ws)
+        _rmtree(ws)
     _save_index([p for p in _load_index() if p["id"] != project_id])
     return {"ok": True}
 
