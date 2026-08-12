@@ -1,0 +1,1 @@
+{"materialized": "snapshot", "unique_key": "id", "schema": "", "alias": "", "tags": "", "pre_hook": "", "post_hook": "", "strategy": "timestamp", "updated_at": "updated_at", "check_cols": "", "invalidate_hard_deletes": false}

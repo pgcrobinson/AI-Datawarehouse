@@ -1,0 +1,1 @@
+{"_invocation_id": "e9480acd-86ef-411c-9e71-16059038c2f1", "linked": {"0": {"name": "model.analytics.customer_and_addresses", "type": "model"}, "1": {"name": "snapshot.analytics.customer_and_addresses", "type": "snapshot", "succ": [2]}, "2": {"name": "model.analytics.number_of_customers_city", "type": "model"}}}

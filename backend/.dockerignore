@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+app.db
+connections.json
+settings.json
+dbt_projects/
+dbt_workspace/

@@ -1,0 +1,23 @@
+# ── Credentials / secrets ──────────────────────────────────────────────────
+.env
+backend/connections.json
+backend/settings.json
+backend/app.db
+
+# ── Runtime data (lives in Docker volume, not repo) ────────────────────────
+backend/dbt_projects/
+
+# ── Python ─────────────────────────────────────────────────────────────────
+backend/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# ── Node / Next.js ─────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/.next/
+
+# ── OS / editors ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

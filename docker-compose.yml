@@ -1,0 +1,42 @@
+services:
+
+  # ── Reverse proxy — single public entry point ─────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: dwb_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+  # ── FastAPI backend ───────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: dwb_backend
+    environment:
+      DATA_DIR: /data
+      # Set these in your .env file on the server
+      FRONTEND_URL: "${FRONTEND_URL:-http://localhost}"
+      BACKEND_URL:  "${BACKEND_URL:-http://localhost}"
+    volumes:
+      - dwb_data:/data
+    restart: unless-stopped
+
+  # ── Next.js frontend ──────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Empty string → API calls go to /api (relative), nginx routes them
+        NEXT_PUBLIC_API_URL: ""
+    container_name: dwb_frontend
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  dwb_data:

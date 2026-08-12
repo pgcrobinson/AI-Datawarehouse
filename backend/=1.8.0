@@ -1,0 +1,148 @@
+Collecting dbt-bigquery
+  Downloading dbt_bigquery-1.12.0-py3-none-any.whl (114 kB)
+     -------------------------------------- 114.1/114.1 kB 3.3 MB/s eta 0:00:00
+Collecting dbt-adapters<2.0,>=1.24.4
+  Downloading dbt_adapters-1.24.5-py3-none-any.whl (177 kB)
+     -------------------------------------- 177.3/177.3 kB 2.1 MB/s eta 0:00:00
+Requirement already satisfied: dbt-common<2.0,>=1.10 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-bigquery) (1.38.0)
+Requirement already satisfied: dbt-core<2.0,>=1.10.0rc0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-bigquery) (1.11.11)
+Requirement already satisfied: google-api-core>=2.11.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-bigquery) (2.32.0)
+Requirement already satisfied: google-auth>=2.29.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-bigquery) (2.56.0)
+Collecting google-cloud-aiplatform>=1.148.0
+  Downloading google_cloud_aiplatform-1.163.0-py2.py3-none-any.whl (9.4 MB)
+     ---------------------------------------- 9.4/9.4 MB 9.1 MB/s eta 0:00:00
+Requirement already satisfied: google-cloud-bigquery[pandas]<4.0,>=3.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-bigquery) (3.42.2)
+Collecting google-cloud-dataproc~=5.0
+  Downloading google_cloud_dataproc-5.30.0-py3-none-any.whl (496 kB)
+     -------------------------------------- 496.3/496.3 kB 7.7 MB/s eta 0:00:00
+Collecting google-cloud-storage<3.2,>=2.4
+  Downloading google_cloud_storage-3.1.1-py3-none-any.whl (175 kB)
+     ------------------------------------- 175.5/175.5 kB 10.3 MB/s eta 0:00:00
+Collecting nbformat>=5.10.4
+  Downloading nbformat-5.10.4-py3-none-any.whl (78 kB)
+     ---------------------------------------- 78.5/78.5 kB 4.5 MB/s eta 0:00:00
+Requirement already satisfied: agate<2.0,>=1.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (1.9.1)
+Requirement already satisfied: dbt-protos<2.0,>=1.0.291 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (1.0.514)
+Requirement already satisfied: mashumaro[msgpack]<3.18,>=3.9 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (3.14)
+Requirement already satisfied: protobuf<7.0,>=6.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (6.33.6)
+Requirement already satisfied: pytz>=2015.7 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (2026.2)
+Requirement already satisfied: typing-extensions<5.0,>=4.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (4.15.0)
+Requirement already satisfied: colorama<0.5,>=0.3.9 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (0.4.6)
+Requirement already satisfied: deepdiff<9.0,>=7.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (8.6.2)
+Requirement already satisfied: isodate<0.8,>=0.6 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (0.7.2)
+Requirement already satisfied: jinja2<4,>=3.1.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (3.1.6)
+Requirement already satisfied: jsonschema<5.0,>=4.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (4.26.0)
+Requirement already satisfied: pathspec<1.1,>=0.9 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (0.12.1)
+Requirement already satisfied: python-dateutil<3.0,>=2.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (2.9.0.post0)
+Requirement already satisfied: requests<3.0.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-common<2.0,>=1.10->dbt-bigquery) (2.34.2)
+Requirement already satisfied: click<9.0,>=8.3.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (8.4.1)
+Requirement already satisfied: daff>=1.3.46 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (1.4.2)
+Requirement already satisfied: dbt-extractor<=0.6,>=0.5.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (0.6.0)
+Requirement already satisfied: dbt-semantic-interfaces<0.10,>=0.9.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (0.9.0)
+Requirement already satisfied: networkx<4.0,>=2.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (3.6.1)
+Requirement already satisfied: packaging>20.9 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (26.2)
+Requirement already satisfied: pydantic<3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (2.7.1)
+Requirement already satisfied: pyyaml>=6.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (6.0.3)
+Requirement already satisfied: snowplow-tracker<2.0,>=1.0.2 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (1.1.0)
+Requirement already satisfied: sqlparse<0.6.0,>=0.5.5 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (0.5.5)
+Requirement already satisfied: googleapis-common-protos<2.0.0,>=1.63.2 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-api-core>=2.11.0->dbt-bigquery) (1.75.0)
+Requirement already satisfied: proto-plus<2.0.0,>=1.24.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-api-core>=2.11.0->dbt-bigquery) (1.28.1)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-auth>=2.29.0->dbt-bigquery) (0.4.2)
+Requirement already satisfied: cryptography>=38.0.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-auth>=2.29.0->dbt-bigquery) (49.0.0)
+Requirement already satisfied: certifi>=2023.7.22 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-aiplatform>=1.148.0->dbt-bigquery) (2026.5.20)
+Collecting google-cloud-resource-manager<3.0.0,>=1.3.3
+  Downloading google_cloud_resource_manager-1.18.0-py3-none-any.whl (404 kB)
+     -------------------------------------- 404.2/404.2 kB 8.4 MB/s eta 0:00:00
+Collecting google-genai<3.0.0,>=1.66.0
+  Downloading google_genai-2.17.0-py3-none-any.whl (1.0 MB)
+     ---------------------------------------- 1.0/1.0 MB 8.3 MB/s eta 0:00:00
+Requirement already satisfied: docstring_parser<1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-aiplatform>=1.148.0->dbt-bigquery) (0.18.0)
+Requirement already satisfied: google-cloud-core<3.0.0,>=2.4.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (2.6.0)
+Requirement already satisfied: google-resumable-media<3.0.0,>=2.0.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (2.10.0)
+Requirement already satisfied: pandas>=1.3.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (3.0.3)
+Collecting pandas-gbq>=0.26.1
+  Downloading pandas_gbq-0.35.0-py3-none-any.whl (50 kB)
+     ---------------------------------------- 50.8/50.8 kB ? eta 0:00:00
+Requirement already satisfied: grpcio<2.0.0,>=1.47.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (1.82.1)
+Collecting pyarrow>=3.0.0
+  Downloading pyarrow-25.0.0-cp311-cp311-win_amd64.whl (27.8 MB)
+     ---------------------------------------- 27.8/27.8 MB 8.3 MB/s eta 0:00:00
+Collecting db-dtypes<2.0.0,>=1.0.4
+  Downloading db_dtypes-1.7.1-py3-none-any.whl (17 kB)
+Collecting grpc-google-iam-v1<1.0.0,>=0.14.2
+  Downloading grpc_google_iam_v1-0.14.5-py3-none-any.whl (32 kB)
+Requirement already satisfied: google-crc32c<2.0.0,>=1.1.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-cloud-storage<3.2,>=2.4->dbt-bigquery) (1.8.0)
+Collecting fastjsonschema>=2.15
+  Downloading fastjsonschema-2.22.1-py3-none-any.whl (26 kB)
+Collecting jupyter-core!=5.0.*,>=4.12
+  Downloading jupyter_core-5.9.1-py3-none-any.whl (29 kB)
+Collecting traitlets>=5.1
+  Downloading traitlets-5.16.1-py3-none-any.whl (86 kB)
+     ---------------------------------------- 86.2/86.2 kB 4.7 MB/s eta 0:00:00
+Requirement already satisfied: Babel>=2.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (2.18.0)
+Requirement already satisfied: leather>=0.3.2 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (0.4.1)
+Requirement already satisfied: parsedatetime!=2.5,>=2.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (2.6)
+Requirement already satisfied: python-slugify>=1.2.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (8.0.4)
+Requirement already satisfied: pytimeparse>=1.1.5 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (1.1.8)
+Requirement already satisfied: tzdata>=2023.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (2026.2)
+Requirement already satisfied: cffi>=2.0.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from cryptography>=38.0.3->google-auth>=2.29.0->dbt-bigquery) (2.0.0)
+Requirement already satisfied: numpy>=1.24.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from db-dtypes<2.0.0,>=1.0.4->google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (2.4.6)
+Requirement already satisfied: importlib-metadata<9,>=6.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-semantic-interfaces<0.10,>=0.9.0->dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (8.9.0)
+Requirement already satisfied: more-itertools<11.0,>=8.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from dbt-semantic-interfaces<0.10,>=0.9.0->dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (10.8.0)
+Requirement already satisfied: orderly-set<6,>=5.4.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from deepdiff<9.0,>=7.0->dbt-common<2.0,>=1.10->dbt-bigquery) (5.5.0)
+Requirement already satisfied: grpcio-status<2.0.0,>=1.41.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-api-core>=2.11.0->dbt-bigquery) (1.81.1)
+Requirement already satisfied: anyio<5.0.0,>=4.8.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (4.13.0)
+Requirement already satisfied: httpx<1.0.0,>=0.28.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (0.28.1)
+Collecting pydantic<3
+  Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+     -------------------------------------- 472.3/472.3 kB 7.5 MB/s eta 0:00:00
+Collecting tenacity<9.2.0,>=8.2.3
+  Downloading tenacity-9.1.4-py3-none-any.whl (28 kB)
+Requirement already satisfied: websockets<17.0,>=13.0.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (16.0)
+Requirement already satisfied: distro<2,>=1.7.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (1.9.0)
+Requirement already satisfied: sniffio in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (1.3.1)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jinja2<4,>=3.1.3->dbt-common<2.0,>=1.10->dbt-bigquery) (3.0.3)
+Requirement already satisfied: attrs>=22.2.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jsonschema<5.0,>=4.0->dbt-common<2.0,>=1.10->dbt-bigquery) (26.1.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jsonschema<5.0,>=4.0->dbt-common<2.0,>=1.10->dbt-bigquery) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jsonschema<5.0,>=4.0->dbt-common<2.0,>=1.10->dbt-bigquery) (0.37.0)
+Requirement already satisfied: rpds-py>=0.25.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jsonschema<5.0,>=4.0->dbt-common<2.0,>=1.10->dbt-bigquery) (2026.5.1)
+Requirement already satisfied: platformdirs>=2.5 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from jupyter-core!=5.0.*,>=4.12->nbformat>=5.10.4->dbt-bigquery) (4.10.1)
+Requirement already satisfied: msgpack>=0.5.6 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from mashumaro[msgpack]<3.18,>=3.9->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (1.2.0)
+Requirement already satisfied: setuptools in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from pandas-gbq>=0.26.1->google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (65.5.0)
+Collecting pydata-google-auth>=1.5.0
+  Downloading pydata_google_auth-1.9.1-py2.py3-none-any.whl (15 kB)
+Collecting psutil>=5.9.8
+  Downloading psutil-7.2.2-cp37-abi3-win_amd64.whl (137 kB)
+     -------------------------------------- 137.7/137.7 kB 8.0 MB/s eta 0:00:00
+Collecting google-auth-oauthlib>=0.7.0
+  Downloading google_auth_oauthlib-1.4.0-py3-none-any.whl (19 kB)
+Requirement already satisfied: pyasn1<0.7.0,>=0.6.1 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from pyasn1-modules>=0.2.1->google-auth>=2.29.0->dbt-bigquery) (0.6.3)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from pydantic<3->dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (0.7.0)
+Collecting pydantic-core==2.46.4
+  Downloading pydantic_core-2.46.4-cp311-cp311-win_amd64.whl (2.1 MB)
+     ---------------------------------------- 2.1/2.1 MB 4.2 MB/s eta 0:00:00
+Collecting typing-inspection>=0.4.2
+  Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Requirement already satisfied: six>=1.5 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from python-dateutil<3.0,>=2.0->dbt-common<2.0,>=1.10->dbt-bigquery) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from requests<3.0.0->dbt-common<2.0,>=1.10->dbt-bigquery) (3.4.7)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from requests<3.0.0->dbt-common<2.0,>=1.10->dbt-bigquery) (3.18)
+Requirement already satisfied: urllib3<3,>=1.26 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from requests<3.0.0->dbt-common<2.0,>=1.10->dbt-bigquery) (2.7.0)
+Requirement already satisfied: pycparser in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from cffi>=2.0.0->cryptography>=38.0.3->google-auth>=2.29.0->dbt-bigquery) (3.0)
+Collecting requests-oauthlib>=0.7.0
+  Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+Requirement already satisfied: httpcore==1.* in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from httpx<1.0.0,>=0.28.1->google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (1.0.9)
+Requirement already satisfied: h11>=0.16 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from httpcore==1.*->httpx<1.0.0,>=0.28.1->google-genai<3.0.0,>=1.66.0->google-cloud-aiplatform>=1.148.0->dbt-bigquery) (0.16.0)
+Requirement already satisfied: zipp>=3.20 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from importlib-metadata<9,>=6.0->dbt-semantic-interfaces<0.10,>=0.9.0->dbt-core<2.0,>=1.10.0rc0->dbt-bigquery) (4.1.0)
+Requirement already satisfied: text-unidecode>=1.3 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from python-slugify>=1.2.1->agate<2.0,>=1.0->dbt-adapters<2.0,>=1.24.4->dbt-bigquery) (1.3)
+Requirement already satisfied: oauthlib>=3.0.0 in c:\users\peter\ai datawarehouse\backend\venv\lib\site-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib>=0.7.0->pandas-gbq>=0.26.1->google-cloud-bigquery[pandas]<4.0,>=3.0->dbt-bigquery) (3.3.1)
+Installing collected packages: typing-inspection, traitlets, tenacity, pydantic-core, pyarrow, psutil, fastjsonschema, requests-oauthlib, pydantic, jupyter-core, grpc-google-iam-v1, db-dtypes, nbformat, google-auth-oauthlib, pydata-google-auth, google-genai, dbt-adapters, google-cloud-storage, google-cloud-resource-manager, google-cloud-dataproc, pandas-gbq, google-cloud-aiplatform, dbt-bigquery
+  Attempting uninstall: pydantic-core
+    Found existing installation: pydantic_core 2.18.2
+    Uninstalling pydantic_core-2.18.2:
+      Successfully uninstalled pydantic_core-2.18.2
+ERROR: Could not install packages due to an OSError: [WinError 5] Access is denied: 'C:\\Users\\peter\\AI Datawarehouse\\backend\\venv\\Lib\\site-packages\\~ydantic_core\\_pydantic_core.cp311-win_amd64.pyd'
+Check the permissions.
+
+
+[notice] A new release of pip available: 22.3.1 -> 26.2.1
+[notice] To update, run: C:\Users\peter\AI Datawarehouse\backend\venv\Scripts\python.exe -m pip install --upgrade pip

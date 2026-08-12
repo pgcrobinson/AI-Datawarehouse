@@ -1,0 +1,15 @@
+analytics:
+  target: dev
+  outputs:
+    dev:
+      type: sqlserver
+      driver: 'ODBC Driver 17 for SQL Server'
+      server: mysqlserverpgcr.database.windows.net
+      port: 1433
+      database: DevmySampleDatabase
+      schema: analytics
+      username: azureuser
+      password: "Ictw1986"
+      authentication: sql
+      trust_cert: true
+      encrypt: false

@@ -1,0 +1,1 @@
+{"materialized": "table", "unique_key": "", "schema": "", "alias": "", "tags": "", "pre_hook": "", "post_hook": "", "strategy": "timestamp", "updated_at": "", "check_cols": "", "invalidate_hard_deletes": false}
