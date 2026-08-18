@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-const BASE = "http://localhost:8000/api";
+const BASE = `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/api`;
 
 export interface AuthUser {
   id: string;
@@ -10,6 +10,7 @@ export interface AuthUser {
   name: string;
   role: "sysadmin" | "designer";
   org_id?: string;
+  has_password: boolean;
 }
 
 interface AuthCtx {
@@ -17,6 +18,8 @@ interface AuthCtx {
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  loginWithToken: (token: string) => Promise<void>;
+  googleLogin: () => void;
   logout: () => void;
 }
 
@@ -56,6 +59,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(data.user);
   }
 
+  async function loginWithToken(tok: string) {
+    const res = await fetch(`${BASE}/auth/me`, {
+      headers: { Authorization: `Bearer ${tok}` },
+    });
+    if (!res.ok) throw new Error("Invalid or expired token");
+    const u = await res.json();
+    localStorage.setItem("dwb_token", tok);
+    setToken(tok);
+    setUser(u);
+  }
+
+  function googleLogin() {
+    window.location.href = `${BASE}/auth/google/login`;
+  }
+
   function logout() {
     localStorage.removeItem("dwb_token");
     setToken(null);
@@ -63,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Ctx.Provider value={{ user, token, loading, login, logout }}>
+    <Ctx.Provider value={{ user, token, loading, login, loginWithToken, googleLogin, logout }}>
       {children}
     </Ctx.Provider>
   );

@@ -308,7 +308,7 @@ function ModelConfigDialog({
         {/* Preview */}
         <div className="mt-3">
           <p className="text-[10px] text-muted-foreground mb-1 uppercase tracking-wide font-semibold">Preview</p>
-          <pre className="bg-[#0d1117] rounded p-3 text-[11px] font-mono text-green-300 whitespace-pre overflow-x-auto">
+          <pre className="bg-muted rounded p-3 text-[11px] font-mono text-primary whitespace-pre overflow-x-auto">
             {generateConfigPreview(cfg)}
           </pre>
         </div>
@@ -1534,7 +1534,7 @@ export default function DataStudioPage() {
 
         {/* Editor */}
         <div
-          className="shrink-0 overflow-hidden bg-[#1d2433]"
+          className="shrink-0 overflow-hidden bg-card border-b border-border"
           style={{ height: editorH }}
         >
           <SqlEditor value={sql} onChange={setSql} onExecute={runQuery} />
@@ -1580,7 +1580,7 @@ export default function DataStudioPage() {
           ) : (
             <div
               ref={dbtOutputRef}
-              className="flex-1 overflow-auto bg-[#0d1117] p-4 font-mono text-xs leading-relaxed"
+              className="flex-1 overflow-auto bg-muted p-4 font-mono text-xs leading-relaxed"
             >
               {dbtOutput.length === 0 && !dbtRunning && (
                 <p className="text-muted-foreground">dbt output will appear here when you run a command.</p>

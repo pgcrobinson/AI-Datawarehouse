@@ -37,15 +37,32 @@ echo "Docker installed."
 echo "=== Cloning repo ==="
 git clone "$REPO_URL" "$APP_DIR"
 
-# ── Generate webhook secret ───────────────────────────────────────────────────
+# ── Generate secrets ─────────────────────────────────────────────────────────
 WEBHOOK_SECRET=$(openssl rand -hex 32)
+JWT_SECRET=$(openssl rand -hex 32)
 
 # ── Write .env ────────────────────────────────────────────────────────────────
 cat > "$APP_DIR/.env" <<EOF
+# Server URLs (auto-detected)
 FRONTEND_URL=http://$PUBLIC_IP
 BACKEND_URL=http://$PUBLIC_IP
-GITHUB_WEBHOOK_SECRET=$WEBHOOK_SECRET
 NEXT_PUBLIC_API_URL=
+
+# Webhook
+GITHUB_WEBHOOK_SECRET=$WEBHOOK_SECRET
+
+# Auth — JWT signing key and first-run admin account
+SECRET_KEY=$JWT_SECRET
+ADMIN_EMAIL=admin@yourdomain.com
+ADMIN_PASSWORD=change-me-before-first-login
+
+# Google BigQuery OAuth — fill in BEFORE starting the app
+# Get these from Google Cloud Console → APIs & Services → Credentials → OAuth client ID
+GOOGLE_OAUTH_CLIENT_ID=
+GOOGLE_OAUTH_CLIENT_SECRET=
+
+# Anthropic API key (optional — for AI design features)
+ANTHROPIC_API_KEY=
 EOF
 chmod 600 "$APP_DIR/.env"
 echo ".env written."
@@ -77,22 +94,32 @@ echo "  Webhook URL:   http://$PUBLIC_IP:9000/webhook"
 echo "  Webhook secret: $WEBHOOK_SECRET"
 echo ""
 echo "  NEXT STEPS:"
-echo "  1. Go to GitHub repo → Settings → Webhooks → Add webhook"
+echo "  1. Fill in Google OAuth credentials (required for Google Sign-In and BigQuery):"
+echo "     nano /opt/app/.env"
+echo "       Set GOOGLE_OAUTH_CLIENT_ID and GOOGLE_OAUTH_CLIENT_SECRET"
+echo "       Change ADMIN_EMAIL and ADMIN_PASSWORD"
+echo "     In Google Cloud Console → APIs & Services → Credentials"
+echo "       → Your OAuth Client → Authorised redirect URIs → Add:"
+echo "         http://$PUBLIC_IP/api/auth/google/callback"
+echo "         http://$PUBLIC_IP/api/database/bigquery/oauth/callback"
+echo "     Then restart: cd /opt/app && docker compose up -d"
+echo ""
+echo "  2. Go to GitHub repo → Settings → Webhooks → Add webhook"
 echo "     URL:          http://$PUBLIC_IP:9000/webhook"
 echo "     Content type: application/json"
 echo "     Secret:       $WEBHOOK_SECRET"
 echo "     Events:       Just the push event"
 echo ""
-echo "  2. In Azure Portal → VM → Networking → Add inbound rule:"
+echo "  3. In Azure Portal → VM → Networking → Add inbound rule:"
 echo "     Port 80  (HTTP for the app)"
 echo "     Port 9000 (webhook listener)"
 echo ""
-echo "  3. Enable HTTPS so BigQuery OAuth works (free, no domain purchase):"
+echo "  4. Enable HTTPS so BigQuery OAuth works (free, no domain purchase):"
 echo "     a) In Azure Portal → VM → Public IP → Configuration"
 echo "        Set a DNS name label, e.g. 'myapp' → gives myapp.REGION.cloudapp.azure.com"
 echo "     b) Open port 443 in Azure → VM → Networking → Inbound rules"
 echo "     c) Run: sudo bash /opt/app/deploy/enable-https.sh myapp.REGION.cloudapp.azure.com you@email.com"
 echo "     d) In Google Cloud Console → APIs & Services → Credentials"
 echo "        → Your OAuth Client → Authorised redirect URIs → add:"
-echo "        https://myapp.REGION.cloudapp.azure.com/api/database/bigquery/callback"
+echo "        https://myapp.REGION.cloudapp.azure.com/api/database/bigquery/oauth/callback"
 echo "============================================================"

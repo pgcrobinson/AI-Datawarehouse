@@ -26,9 +26,10 @@ class User(Base):
     id = Column(String, primary_key=True)
     email = Column(String, nullable=False, unique=True)
     name = Column(String, nullable=False)
-    password_hash = Column(String, nullable=False)
+    password_hash = Column(String, nullable=False, default="")
     role = Column(String, nullable=False, default="designer")
     org_id = Column(String, ForeignKey("organisations.id"), nullable=True)
+    google_id = Column(String, nullable=True)
     created_at = Column(DateTime)
     organisation = relationship("Organisation", back_populates="users")
     projects = relationship("Project", back_populates="user")
@@ -127,6 +128,8 @@ def init_db():
         "CREATE INDEX IF NOT EXISTS ix_log_entries_created_at ON log_entries (created_at DESC)",
         "CREATE INDEX IF NOT EXISTS ix_log_entries_level ON log_entries (level)",
         "CREATE INDEX IF NOT EXISTS ix_log_entries_category ON log_entries (category)",
+        "ALTER TABLE users ADD COLUMN google_id TEXT",
+        "CREATE UNIQUE INDEX IF NOT EXISTS ix_users_google_id ON users (google_id) WHERE google_id IS NOT NULL",
         "ALTER TABLE designs ADD COLUMN etl_sql TEXT",
         "ALTER TABLE design_versions ADD COLUMN sql_type TEXT NOT NULL DEFAULT 'ddl'",
         """CREATE TABLE IF NOT EXISTS design_transforms (

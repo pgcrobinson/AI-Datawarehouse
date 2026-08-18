@@ -26,10 +26,10 @@ const BASE_NAV = [
 ];
 
 function ChangePasswordDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [current, setCurrent]   = useState("");
-  const [next, setNext]         = useState("");
-  const [confirm, setConfirm]   = useState("");
-  const [saving, setSaving]     = useState(false);
+  const [current, setCurrent] = useState("");
+  const [next, setNext]       = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [saving, setSaving]   = useState(false);
 
   function reset() { setCurrent(""); setNext(""); setConfirm(""); }
 
@@ -72,9 +72,7 @@ function ChangePasswordDialog({ open, onClose }: { open: boolean; onClose: () =>
             <Input type="password" value={confirm} onChange={e => setConfirm(e.target.value)} required />
           </div>
           <div className="flex gap-2 justify-end pt-1">
-            <Button type="button" variant="ghost" size="sm" onClick={() => { reset(); onClose(); }}>
-              Cancel
-            </Button>
+            <Button type="button" variant="ghost" size="sm" onClick={() => { reset(); onClose(); }}>Cancel</Button>
             <Button type="submit" size="sm" disabled={saving || !current || !next || !confirm}>
               {saving && <Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />}
               Change password
@@ -104,60 +102,76 @@ export function Sidebar() {
       : []),
   ];
 
+  const initials = user?.name
+    ? user.name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2)
+    : "U";
+
   return (
     <>
-      <aside className="flex h-screen w-56 flex-col border-r border-border bg-card">
-        {/* Logo */}
-        <div className="flex items-center gap-2 px-4 py-5 border-b border-border">
-          <BrainCircuit className="h-6 w-6 text-primary" />
-          <span className="font-semibold text-sm tracking-tight">DW Builder</span>
+      <aside className="flex h-screen w-60 flex-col border-r border-border bg-card shadow-sm shrink-0">
+
+        {/* Brand */}
+        <div className="flex items-center gap-3 px-5 py-5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
+            <BrainCircuit className="h-4.5 w-4.5 text-primary-foreground" />
+          </div>
+          <div className="leading-tight">
+            <p className="text-sm font-semibold tracking-tight">DW Builder</p>
+            <p className="text-[10px] text-muted-foreground">Data Warehouse</p>
+          </div>
         </div>
 
-        {/* Nav links */}
-        <nav className="flex-1 px-2 py-4 space-y-1">
-          {nav.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === href || pathname.startsWith(href + "/")
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              {label}
-            </Link>
-          ))}
+        {/* Nav */}
+        <nav className="flex-1 px-3 py-2 space-y-0.5">
+          {nav.map(({ href, label, icon: Icon }) => {
+            const active = pathname === href || pathname.startsWith(href + "/");
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  "flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-150",
+                  active
+                    ? "bg-accent text-primary font-semibold"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                )}
+              >
+                <Icon className={cn("h-4 w-4 shrink-0", active ? "text-primary" : "")} />
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* User info + actions */}
+        {/* User footer */}
         <div className="px-3 py-3 border-t border-border space-y-1">
           {user && (
-            <div className="px-2 py-1">
-              <p className="text-xs font-medium truncate">{user.name}</p>
-              <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+            <div className="flex items-center gap-3 px-2 py-2 rounded-lg mb-1">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                {initials}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-medium truncate">{user.name}</p>
+                <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+              </div>
             </div>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setChangePwOpen(true)}
-            className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground h-8 px-2"
-          >
-            <KeyRound className="h-3.5 w-3.5" />
-            Change password
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
+          {user?.has_password && (
+            <button
+              onClick={() => setChangePwOpen(true)}
+              className="flex w-full items-center gap-3 rounded-full px-4 py-2 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            >
+              <KeyRound className="h-3.5 w-3.5 shrink-0" />
+              Change password
+            </button>
+          )}
+          <button
             onClick={handleLogout}
-            className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground h-8 px-2"
+            className="flex w-full items-center gap-3 rounded-full px-4 py-2 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
           >
-            <LogOut className="h-3.5 w-3.5" />
+            <LogOut className="h-3.5 w-3.5 shrink-0" />
             Sign out
-          </Button>
+          </button>
         </div>
       </aside>
 

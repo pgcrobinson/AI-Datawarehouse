@@ -10,6 +10,16 @@ import os
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-change-this-secret-in-production")
 ALGORITHM = "HS256"
 
+_WEAK_KEYS = {"dev-change-this-secret-in-production", "change-me", "change-me-to-a-long-random-string"}
+if SECRET_KEY in _WEAK_KEYS or len(SECRET_KEY) < 32:
+    import sys
+    print(
+        "\033[91m[SECURITY WARNING] SECRET_KEY is weak or default — "
+        "JWT tokens can be forged. Set a strong SECRET_KEY in your .env file.\033[0m",
+        file=sys.stderr,
+        flush=True,
+    )
+
 _security = HTTPBearer()
 
 

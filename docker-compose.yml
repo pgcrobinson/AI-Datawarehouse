@@ -20,8 +20,14 @@ services:
     environment:
       DATA_DIR: /data
       # Set these in your .env file on the server
-      FRONTEND_URL: "${FRONTEND_URL:-http://localhost}"
-      BACKEND_URL:  "${BACKEND_URL:-http://localhost}"
+      FRONTEND_URL:               "${FRONTEND_URL:-http://localhost}"
+      BACKEND_URL:                "${BACKEND_URL:-http://localhost}"
+      SECRET_KEY:                 "${SECRET_KEY:-change-me}"
+      ADMIN_EMAIL:                "${ADMIN_EMAIL:-admin@example.com}"
+      ADMIN_PASSWORD:             "${ADMIN_PASSWORD:-change-me}"
+      GOOGLE_OAUTH_CLIENT_ID:     "${GOOGLE_OAUTH_CLIENT_ID:-}"
+      GOOGLE_OAUTH_CLIENT_SECRET: "${GOOGLE_OAUTH_CLIENT_SECRET:-}"
+      ANTHROPIC_API_KEY:          "${ANTHROPIC_API_KEY:-}"
     volumes:
       - dwb_data:/data
     restart: unless-stopped

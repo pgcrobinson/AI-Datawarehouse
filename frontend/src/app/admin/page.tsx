@@ -14,9 +14,11 @@ import {
   Eye, EyeOff, Save, KeyRound, Bot, CheckCircle2, AlertCircle,
   Trash2, Plus, Users, Building2, Settings, Loader2,
   ScrollText, RefreshCw, Download, ChevronLeft, ChevronRight, ChevronDown, ChevronRight as ChevronRightIcon,
+  Sun, Moon, Palette,
 } from "lucide-react";
 import { api } from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import type { AdminUser, Organisation, AISettingsResponse, LogEntry } from "@/lib/types";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -572,6 +574,71 @@ function LogsTab() {
   );
 }
 
+// ── Appearance Tab ────────────────────────────────────────────────────────────
+function AppearanceTab() {
+  const { theme, setTheme } = useTheme();
+
+  const options = [
+    {
+      value: "light" as const,
+      icon: Sun,
+      label: "Light",
+      desc: "Clean white interface",
+    },
+    {
+      value: "dark" as const,
+      icon: Moon,
+      label: "Dark",
+      desc: "Easy on the eyes",
+    },
+  ];
+
+  return (
+    <div className="space-y-4 max-w-xl">
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-sm flex items-center gap-2">
+            <Palette className="h-4 w-4" /> Theme
+          </CardTitle>
+          <CardDescription className="text-xs">
+            Choose how the app looks. Your preference is saved in this browser.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 gap-3">
+            {options.map(({ value, icon: Icon, label, desc }) => {
+              const active = theme === value;
+              return (
+                <button
+                  key={value}
+                  onClick={() => setTheme(value)}
+                  className={cn(
+                    "flex flex-col items-center gap-3 rounded-xl border-2 p-5 transition-all duration-150 text-center",
+                    active
+                      ? "border-primary bg-accent text-primary"
+                      : "border-border hover:border-muted-foreground/40 hover:bg-muted text-muted-foreground"
+                  )}
+                >
+                  <Icon className={cn("h-7 w-7", active ? "text-primary" : "text-muted-foreground")} />
+                  <div>
+                    <p className={cn("text-sm font-semibold", active ? "text-primary" : "text-foreground")}>
+                      {label}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+                  </div>
+                  {active && (
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 // ── Main Admin Page ────────────────────────────────────────────────────────────
 export default function AdminPage() {
   const { user } = useAuth();
@@ -615,6 +682,9 @@ export default function AdminPage() {
           <TabsTrigger value="logs" className="gap-2">
             <ScrollText className="h-3.5 w-3.5" /> Logs
           </TabsTrigger>
+          <TabsTrigger value="appearance" className="gap-2">
+            <Palette className="h-3.5 w-3.5" /> Appearance
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="users" className="mt-4">
           <UsersTab orgs={orgs} />
@@ -627,6 +697,9 @@ export default function AdminPage() {
         </TabsContent>
         <TabsContent value="logs" className="mt-4">
           <LogsTab />
+        </TabsContent>
+        <TabsContent value="appearance" className="mt-4">
+          <AppearanceTab />
         </TabsContent>
       </Tabs>
     </div>
