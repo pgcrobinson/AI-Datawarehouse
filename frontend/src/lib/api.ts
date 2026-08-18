@@ -100,6 +100,12 @@ export const api = {
       `/database/connections/${id}/activate`, { method: "POST" }
     ),
 
+  updateConnection: (id: string, data: Partial<ConnectionConfig>) =>
+    request<Connection>(`/database/connections/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+
   // ── Query ────────────────────────────────────────────────────────────────────
   executeQuery: (sql: string, connectionId?: string, defaultSchema?: string) =>
     request<QueryResult>("/query/execute", {

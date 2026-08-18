@@ -2,14 +2,31 @@ import os
 import secrets
 import hashlib
 import base64
+from typing import Optional
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import RedirectResponse
-from models.schemas import ConnectionConfig, ConnectionResponse, TestConnectionRequest
+from pydantic import BaseModel
+from models.schemas import ConnectionConfig, ConnectionResponse, TestConnectionRequest, AuthType
 from core.db import (
     test_connection, add_connection, get_all_connections,
     delete_connection, set_active_connection, get_active_connection_id,
     get_connection, update_connection,
 )
+
+
+class ConnectionUpdate(BaseModel):
+    name:             Optional[str]      = None
+    server:           Optional[str]      = None
+    database:         Optional[str]      = None
+    auth_type:        Optional[AuthType] = None
+    username:         Optional[str]      = None
+    password:         Optional[str]      = None
+    port:             Optional[int]      = None
+    warehouse:        Optional[str]      = None
+    schema_name:      Optional[str]      = None
+    http_path:        Optional[str]      = None
+    project_id:       Optional[str]      = None
+    credentials_json: Optional[str]      = None
 
 router = APIRouter()
 
@@ -56,6 +73,16 @@ async def remove_connection(conn_id: str):
         raise HTTPException(status_code=404, detail="Connection not found")
     delete_connection(conn_id)
     return {"success": True}
+
+
+@router.patch("/connections/{conn_id}", response_model=ConnectionResponse)
+async def patch_connection(conn_id: str, updates: ConnectionUpdate):
+    if not get_connection(conn_id):
+        raise HTTPException(status_code=404, detail="Connection not found")
+    update_dict = {k: v for k, v in updates.model_dump().items() if v is not None}
+    if update_dict:
+        update_connection(conn_id, update_dict)
+    return _to_response(get_connection(conn_id), get_active_connection_id())
 
 
 @router.post("/connections/{conn_id}/test")

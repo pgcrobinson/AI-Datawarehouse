@@ -18,6 +18,7 @@ export interface Connection {
   http_path?: string;
   // BigQuery
   project_id?: string;
+  oauth_connected?: boolean;
   is_active: boolean;
 }
 
